@@ -1,28 +1,26 @@
--- Resource Metadata
 fx_version 'cerulean'
 
 game 'gta5' 
 
 lua54 'yes'
 
-author 'KTO Elise'
-description 'KTO Washhands'
+-- Information
+author 'Scripto Goat'
+description 'SG Sinks'
 version '1.0.0'
 
--- SHARED SCRIPTS
+-- Shared
 shared_script {
-    '@ox_lib/init.lua', 
-    '@oxmysql/lib/MySQL.lua',
-    '@qbx_core/modules/libs.lua',
-    '@qbx_core/modules/playerdata.lua'
+    'config.lua',
+    '@ox_lib/init.lua' 
 }
 
--- CLIENT SCRIPTS
+-- Client
 client_scripts {
-    'client.lua',
+    'locals.lua',
+    'client.lua'
 }
 
--- SERVER SCRIPTS
-
+-- Dependencies
 dependencies {'ox_lib'}
 
