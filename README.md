@@ -1,5 +1,5 @@
 
-![Scripto Goat Banner](https://github.com/Scripto-Goat/sg-sinks/assets/154728266/853d6791-e701-4596-9eba-9fbdaf9eba60)
+![sg-sinks2](https://github.com/Scripto-Goat/sg-sinks/assets/154728266/8c9c7391-fc0b-4ec2-b7f5-2fac987d6077)
 
 # Welcome to Scripto Goat Sinks!
 Would you like to enhance the roleplay in your roleplay server with an extra feature that seems small but actually makes a big difference? SG Sinks is the solution! 🐐 Our script makes it possible to wash your ped's hands in different types of sinks. Washing hands can improve for example restaurant roleplay where people have to cook food: hygiene is very important!
@@ -13,6 +13,13 @@ Would you like to enhance the roleplay in your roleplay server with an extra fea
 - Possible option to add sound to the animation to immerse your players!
 - Possible to change the animation by configuring this in the config;
 - Choose from 3 different types of notifications ór add your own: okok, ox or mythic;
+
+# Dependencies
+- Framework QBCore/QBX
+- QB-target/ox-target (depends on what you're planning to use)
+- ox_lib
+- okok, ox or mythic-notify (depending on what you're planning to use)
+- interact-sound (if you're planning to use sound)
 
 # Links
 Do you want to know more about Scripto Goat or about our scripts? Join our [Discord](https://discord.gg/ZGAPQE2yC3)!
