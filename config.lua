@@ -36,5 +36,4 @@ Config.Props = {
         'prop_sink_02',
 }
 
-
-local QBCore = exports['qb-core']:GetCoreObject()
+QBCore = exports['qb-core']:GetCoreObject()
