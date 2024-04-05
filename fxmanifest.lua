@@ -17,7 +17,8 @@ shared_script {
 
 -- Client
 client_scripts {
-    'locals.lua',
+    'locals/*.lua',
+    'bridge/*.lua',
     'client.lua'
 }
 

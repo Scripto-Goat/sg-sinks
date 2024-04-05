@@ -17,6 +17,9 @@ Config.Progress = {
     Duration = 5000,
 }
 
+-- Animation Configuration
+Config.Animation = 'PROP_HUMAN_BUM_BIN' -- If the animation does not work, configure in client.lua
+
 -- Sound Configuration
 Config.Sound = 'true' -- Choose 'true' or leave blank
 
@@ -25,6 +28,7 @@ Config.Notify = 'ox' -- Choose from 'okok', 'ox', 'mythic'
 
 -- Prop Configuration
 Config.Props = {
+        --'prop_bin_05a', -- For test purposes
         'prop_bar_sink_01', 
         'prop_ff_sink_02', 
         'prop_sink_04', 

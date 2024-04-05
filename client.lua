@@ -14,7 +14,9 @@ CreateThread(function()
                 iconColor = Config.Target.IconColor,
                 --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
                 distance = Config.Target.Distance,
-                event = "sg-sinks:washhands",
+                onSelect = function()
+                    Washhands()
+                end
             }
         })
 
@@ -27,7 +29,9 @@ CreateThread(function()
                 icon = Config.Target.Icon,
                 --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
                 type = "client", 
-                event = "sg-sinks:washhands", 
+                action = function()
+                    Washhands()
+                end
               }
             },
             distance = Config.Target.Distance, 
@@ -38,8 +42,7 @@ CreateThread(function()
 end)
 
 -- Wash hands
-RegisterNetEvent('sg-sinks:washhands')
-AddEventHandler('sg-sinks:washhands', function()
+function Washhands()
 
     if Config.Progress.Type == 'circle' then
 
@@ -65,36 +68,16 @@ AddEventHandler('sg-sinks:washhands', function()
             anim = {
                 blendIn = 1.0,
                 duration = 3000,
-                scenario = 'PROP_HUMAN_BUM_BIN',
+                scenario = Config.Animation,
                 blendOut = 1.0,
             },
         })
         then
             Wait(100)
-            if Config.Notify == 'okok' then
-                exports['okokNotify']:Alert(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 3000, 'success', true)
-            elseif Config.Notify == 'ox' then
-                lib.notify({
-                    title = Locals[Config.Language]['SuccessTitle'],
-                    description = Locals[Config.Language]['SuccessDescription'],
-                    type = 'success'
-                })
-            elseif Config.Notify == 'mythic' then
-                exports['mythic_notify']:DoHudText('success', Locals[Config.Language]['SuccessDescription'])
-            end
+            Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
         else
             ClearPedTasksImmediately(PlayerPedId())
-            if Config.Notify == 'okok' then
-                exports['okokNotify']:Alert(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 3000, 'error', true)
-            elseif Config.Notify == 'ox' then
-                lib.notify({
-                    title = Locals[Config.Language]['ErrorTitle'],
-                    description = Locals[Config.Language]['ErrorDescription'],
-                    type = 'error'
-                })
-            elseif Config.Notify == 'mythic' then
-                exports['mythic_notify']:DoHudText('error', Locals[Config.Language]['ErrorDescription'])
-            end
+            Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
         end
     elseif Config.Progress.Type == 'bar' then
 
@@ -113,36 +96,16 @@ AddEventHandler('sg-sinks:washhands', function()
             anim = {
                 blendIn = 1.0,
                 duration = 3000,
-                scenario = 'PROP_HUMAN_BUM_BIN',
+                scenario = Config.Animation,
                 blendOut = 1.0,
             },
         }) 
         then
         Wait(100)
-        if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 3000, 'success', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['SuccessTitle'],
-                description = Locals[Config.Language]['SuccessDescription'],
-                type = 'success'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('success', Locals[Config.Language]['SuccessDescription'])
-        end
+        Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
     else
         ClearPedTasksImmediately(PlayerPedId())
-        if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 3000, 'error', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['ErrorTitle'],
-                description = Locals[Config.Language]['ErrorDescription'],
-                type = 'error'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('error', Locals[Config.Language]['ErrorDescription'])
-        end    
+        Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'skillcheck' then
 
@@ -153,35 +116,17 @@ elseif Config.Progress.Type == 'skillcheck' then
         if Config.Sound == 'true' then
             TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
         end
-        TaskStartScenarioInPlace(source, 'PROP_HUMAN_BUM_BIN', 0, true)
+
+        TaskStartScenarioInPlace(source, Config.Animation, 0, true)
         Wait(6500)
         ClearPedTasksImmediately(source)
 
-        if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 3000, 'success', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['SuccessTitle'],
-                description = Locals[Config.Language]['SuccessDescription'],
-                type = 'success'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('success', Locals[Config.Language]['SuccessDescription'])
-        end
+        Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
+
     else
         lib.cancelSkillCheck()
         ClearPedTasksImmediately(source)
-        if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 3000, 'error', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['ErrorTitle'],
-                description = Locals[Config.Language]['ErrorDescription'],
-                type = 'error'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('error', Locals[Config.Language]['ErrorDescription'])
-        end    
+        Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'qb-bar' then
 
@@ -189,40 +134,17 @@ elseif Config.Progress.Type == 'qb-bar' then
         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
     end
 
-    TaskStartScenarioInPlace(source, 'PROP_HUMAN_BUM_BIN', 0, true)
+    TaskStartScenarioInPlace(source, Config.Animation, 0, true)
     QBCore.Functions.Progressbar("washhands", Locals[Config.Language]['ProgressLabel'], Config.Progress.Duration, false, true, {
         disableMovement = true,
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,
      }, {}, {}, {}, function()
-                if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 3000, 'success', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['SuccessTitle'],
-                description = Locals[Config.Language]['SuccessDescription'],
-                type = 'success'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('success', Locals[Config.Language]['SuccessDescription'])
-        end
+        Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
      end, function()
         ClearPedTasksImmediately(source)
-        if Config.Notify == 'okok' then
-            exports['okokNotify']:Alert(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 3000, 'error', true)
-        elseif Config.Notify == 'ox' then
-            lib.notify({
-                title = Locals[Config.Language]['ErrorTitle'],
-                description = Locals[Config.Language]['ErrorDescription'],
-                type = 'error'
-            })
-        elseif Config.Notify == 'mythic' then
-            exports['mythic_notify']:DoHudText('error', Locals[Config.Language]['ErrorDescription'])
-        end  
+        Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
      end)
-
+    end
 end
-end)
-
-
