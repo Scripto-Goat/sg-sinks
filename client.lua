@@ -76,7 +76,7 @@ function Washhands()
             Wait(100)
             Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
         else
-            ClearPedTasksImmediately(PlayerPedId())
+            ClearPedTasksImmediately(source)
             Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
         end
     elseif Config.Progress.Type == 'bar' then
@@ -104,7 +104,7 @@ function Washhands()
         Wait(100)
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
     else
-        ClearPedTasksImmediately(PlayerPedId())
+        ClearPedTasksImmediately(source)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'skillcheck' then
