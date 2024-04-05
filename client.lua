@@ -1,48 +1,5 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-local source = PlayerPedId()
-
--- Target
-CreateThread(function()
-
-    if Config.Target.Type == 'ox' then
-
-        exports.ox_target:addModel(Config.Props, {
-            {
-                name = 'sink',
-                label = Locals[Config.Language]['TargetLabel'],
-                icon = Config.Target.Icon,
-                iconColor = Config.Target.IconColor,
-                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
-                distance = Config.Target.Distance,
-                onSelect = function()
-                    Washhands()
-                end
-            }
-        })
-
-    elseif Config.Target.Type == 'qb' then
-
-          exports['qb-target']:AddTargetModel(Config.Props, {
-            options = { 
-              { 
-                label = Locals[Config.Language]['TargetLabel'], 
-                icon = Config.Target.Icon,
-                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
-                type = "client", 
-                action = function()
-                    Washhands()
-                end
-              }
-            },
-            distance = Config.Target.Distance, 
-          })
-
-    end
-
-end)
-
--- Wash hands
-function Washhands()
+-- function--
+local function Washhands()
 
     if Config.Progress.Type == 'circle' then
 
@@ -76,7 +33,7 @@ function Washhands()
             Wait(100)
             Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
         else
-            ClearPedTasksImmediately(PlayerPedId())
+            ClearPedTasksImmediately(cache.ped)
             Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
         end
     elseif Config.Progress.Type == 'bar' then
@@ -104,7 +61,7 @@ function Washhands()
         Wait(100)
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
     else
-        ClearPedTasksImmediately(PlayerPedId())
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'skillcheck' then
@@ -117,15 +74,15 @@ elseif Config.Progress.Type == 'skillcheck' then
             TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
         end
 
-        TaskStartScenarioInPlace(source, Config.Animation, 0, true)
+        TaskStartScenarioInPlace(cache.ped, Config.Animation, 0, true)
         Wait(6500)
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
 
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
 
     else
         lib.cancelSkillCheck()
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'qb-bar' then
@@ -134,7 +91,7 @@ elseif Config.Progress.Type == 'qb-bar' then
         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
     end
 
-    TaskStartScenarioInPlace(source, Config.Animation, 0, true)
+    TaskStartScenarioInPlace(cache.ped, Config.Animation, 0, true)
     QBCore.Functions.Progressbar("washhands", Locals[Config.Language]['ProgressLabel'], Config.Progress.Duration, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -143,8 +100,29 @@ elseif Config.Progress.Type == 'qb-bar' then
      }, {}, {}, {}, function()
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
      end, function()
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
      end)
     end
 end
+
+------------------------- target
+CreateThread(function()
+    exports['qb-target']:AddTargetModel(Config.Props, {   ---- ox_target support AddTargetModel
+      options = { 
+          { 
+            label = Locals[Config.Language]['TargetLabel'], 
+             icon = Config.Target.Icon,
+            --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
+            type = "client", 
+            action = function()
+                 Washhands()
+                    end
+                  }
+                },
+                distance = Config.Target.Distance, 
+              })
+    
+        end
+    
+    end)

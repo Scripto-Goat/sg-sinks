@@ -4,7 +4,6 @@ Config.Language = 'en' -- en, nl, de, fr, es, it, ar, tr
 
 -- Target Configuration
 Config.Target = {
-    Type = 'ox', -- Choose from 'ox' or 'qb'
     Icon = "fas fa-hands-bubbles", -- Choose from https://fontawesome.com/icons
     IconColor = "#9bedff",
     --Item = "soap", -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in client.lua
@@ -36,3 +35,6 @@ Config.Props = {
         'prop_sink_06',
         'prop_sink_02',
 }
+
+
+local QBCore = exports['qb-core']:GetCoreObject()
