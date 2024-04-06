@@ -2,7 +2,6 @@ Config = {}
 
 Config.Language = 'en' -- en, nl, de, fr, es, it, ar, tr
 
--- Target Configuration
 Config.Target = {
     Type = 'ox', -- Choose from 'ox' or 'qb'
     Icon = "fas fa-hands-bubbles", -- Choose from https://fontawesome.com/icons
@@ -11,22 +10,17 @@ Config.Target = {
     Distance = 2.0,
 }
 
--- Progress Configuration
 Config.Progress = {
     Type = 'circle', -- 'circle', 'bar', 'skillcheck' or 'qb-bar'
     Duration = 5000,
 }
 
--- Animation Configuration
 Config.Animation = 'PROP_HUMAN_BUM_BIN' -- If the animation does not work, configure in client.lua
 
--- Sound Configuration
 Config.Sound = 'true' -- Choose 'true' or leave blank
 
--- Notify Configuration
 Config.Notify = 'ox' -- Choose from 'okok', 'ox', 'mythic'
 
--- Prop Configuration
 Config.Props = {
         --'prop_bin_05a', -- For test purposes
         'prop_bar_sink_01', 
