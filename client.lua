@@ -1,46 +1,6 @@
 
--- Target
-CreateThread(function()
-
-    if Config.Target.Type == 'ox' then
-
-        exports.ox_target:addModel(Config.Props, {
-            {
-                name = 'sink',
-                label = Locals[Config.Language]['TargetLabel'],
-                icon = Config.Target.Icon,
-                iconColor = Config.Target.IconColor,
-                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
-                distance = Config.Target.Distance,
-                onSelect = function()
-                    Washhands()
-                end
-            }
-        })
-
-    elseif Config.Target.Type == 'qb' then
-
-          exports['qb-target']:AddTargetModel(Config.Props, {
-            options = { 
-              { 
-                label = Locals[Config.Language]['TargetLabel'], 
-                icon = Config.Target.Icon,
-                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
-                type = "client", 
-                action = function()
-                    Washhands()
-                end
-              }
-            },
-            distance = Config.Target.Distance, 
-          })
-
-    end
-
-end)
-
 -- Wash hands
-function Washhands()
+local function Washhands()
 
     if Config.Progress.Type == 'circle' then
 
@@ -147,3 +107,43 @@ elseif Config.Progress.Type == 'qb-bar' then
      end)
     end
 end
+
+-- Target
+CreateThread(function()
+
+    if Config.Target.Type == 'ox' then
+
+        exports.ox_target:addModel(Config.Props, {
+            {
+                name = 'sink',
+                label = Locals[Config.Language]['TargetLabel'],
+                icon = Config.Target.Icon,
+                iconColor = Config.Target.IconColor,
+                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
+                distance = Config.Target.Distance,
+                onSelect = function()
+                    Washhands()
+                end
+            }
+        })
+
+    elseif Config.Target.Type == 'qb' then
+
+          exports['qb-target']:AddTargetModel(Config.Props, {
+            options = { 
+              { 
+                label = Locals[Config.Language]['TargetLabel'], 
+                icon = Config.Target.Icon,
+                --item = Config.Target.Item, -- Uncomment if you only want people to see target when they have item in inventory, also uncomment in config.lua
+                type = "client", 
+                action = function()
+                    Washhands()
+                end
+              }
+            },
+            distance = Config.Target.Distance, 
+          })
+
+    end
+
+end)
