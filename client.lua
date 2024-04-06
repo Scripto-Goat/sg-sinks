@@ -1,5 +1,3 @@
-local QBCore = exports['qb-core']:GetCoreObject()
-local source = PlayerPedId()
 
 -- Target
 CreateThread(function()
@@ -76,7 +74,7 @@ function Washhands()
             Wait(100)
             Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
         else
-            ClearPedTasksImmediately(source)
+            ClearPedTasksImmediately(cache.ped)
             Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
         end
     elseif Config.Progress.Type == 'bar' then
@@ -104,7 +102,7 @@ function Washhands()
         Wait(100)
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
     else
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'skillcheck' then
@@ -117,15 +115,15 @@ elseif Config.Progress.Type == 'skillcheck' then
             TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
         end
 
-        TaskStartScenarioInPlace(source, Config.Animation, 0, true)
+        TaskStartScenarioInPlace(cache.ped, Config.Animation, 0, true)
         Wait(6500)
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
 
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
 
     else
         lib.cancelSkillCheck()
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
     end
 elseif Config.Progress.Type == 'qb-bar' then
@@ -134,7 +132,8 @@ elseif Config.Progress.Type == 'qb-bar' then
         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
     end
 
-    TaskStartScenarioInPlace(source, Config.Animation, 0, true)
+    TaskStartScenarioInPlace(cache.ped, Config.Animation, 0, true)
+    local QBCore = exports['qb-core']:GetCoreObject()
     QBCore.Functions.Progressbar("washhands", Locals[Config.Language]['ProgressLabel'], Config.Progress.Duration, false, true, {
         disableMovement = true,
         disableCarMovement = true,
@@ -143,7 +142,7 @@ elseif Config.Progress.Type == 'qb-bar' then
      }, {}, {}, {}, function()
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
      end, function()
-        ClearPedTasksImmediately(source)
+        ClearPedTasksImmediately(cache.ped)
         Notify(Locals[Config.Language]['ErrorTitle'], Locals[Config.Language]['ErrorDescription'], 'error')
      end)
     end
