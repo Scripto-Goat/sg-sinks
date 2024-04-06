@@ -15,7 +15,7 @@ Would you like to enhance the roleplay in your roleplay server with an extra fea
 - Choose from 3 different types of notifications ór add your own: okok, ox or mythic;
 
 # Dependencies
-- Framework QBCore/QBX
+- QBCore/QBX (if using qb-bar)
 - QB-target/ox-target (depends on what you're planning to use)
 - ox_lib
 - okok, ox or mythic-notify (depending on what you're planning to use)
