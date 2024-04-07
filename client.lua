@@ -24,9 +24,10 @@ local function Washhands()
                 car = true,
             },
             anim = {
+                dict = 'missheist_agency3aig_23',
+                clip = 'urinal_sink_loop',
                 blendIn = 1.0,
                 duration = 3000,
-                scenario = Config.Animation,
                 blendOut = 1.0,
             },
         })
@@ -52,9 +53,10 @@ local function Washhands()
                 car = true,
             },
             anim = {
+                dict = 'missheist_agency3aig_23',
+                clip = 'urinal_sink_loop',
                 blendIn = 1.0,
                 duration = 3000,
-                scenario = Config.Animation,
                 blendOut = 1.0,
             },
         }) 
@@ -75,7 +77,7 @@ elseif Config.Progress.Type == 'skillcheck' then
             TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 4, "hands", 0.5)
         end
 
-        TaskStartScenarioInPlace(cache.ped, Config.Animation, 0, true)
+        TaskPlayAnim(cache.ped,"missheist_agency3aig_23","urinal_sink_loop", 1.0, -1.0, -1, 1, 1, true, true, true)
         Wait(6500)
         ClearPedTasksImmediately(cache.ped)
 
@@ -99,7 +101,10 @@ elseif Config.Progress.Type == 'qb-bar' then
         disableCarMovement = true,
         disableMouse = false,
         disableCombat = true,
-     }, {}, {}, {}, function()
+     }, {
+        animDict = "missheist_agency3aig_23",
+        anim = "urinal_sink_loop",
+     }, {}, {}, function()
         Notify(Locals[Config.Language]['SuccessTitle'], Locals[Config.Language]['SuccessDescription'], 'success')
      end, function()
         ClearPedTasksImmediately(cache.ped)

@@ -7,7 +7,7 @@ lua54 'yes'
 -- Information
 author 'Scripto Goat'
 description 'SG Sinks'
-version '1.0.0'
+version '1.0.1'
 
 -- Shared
 shared_script {

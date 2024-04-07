@@ -15,8 +15,6 @@ Config.Progress = {
     Duration = 5000,
 }
 
-Config.Animation = 'PROP_HUMAN_BUM_BIN' -- If the animation does not work, configure in client.lua
-
 Config.Sound = 'true' -- Choose 'true' or leave blank
 
 Config.Notify = 'ox' -- Choose from 'okok', 'ox', 'mythic'
