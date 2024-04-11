@@ -12,6 +12,11 @@ function Notify(title, msg, type)
             })
         elseif Config.Notify == 'mythic' then
             exports['mythic_notify']:DoHudText('success', msg)
+        elseif SharedConfig.Notify == 'qb' then
+            QBCore.Functions.Notify({
+                text = title,
+                caption = msg,
+            }, 'success', 3000)
         end
 
     elseif type == 'error' then
@@ -26,7 +31,11 @@ function Notify(title, msg, type)
             })
         elseif Config.Notify == 'mythic' then
             exports['mythic_notify']:DoHudText('error', msg)
+        elseif SharedConfig.Notify == 'qb' then
+            QBCore.Functions.Notify({
+                text = title,
+                caption = msg,
+            }, 'error', 3000)
         end
-
     end
 end
