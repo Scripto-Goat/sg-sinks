@@ -12,7 +12,7 @@ return {
         Duration = 5000,
     },
     Sound = true, -- true/false
-    Notify = 'ox', -- Choose from 'okok', 'ox', 'mythic'
+    Notify = 'ox', -- Choose from 'okok', 'qb', 'ox', 'mythic'
     Props = {
         --'prop_bin_05a', -- For test purposes
         'prop_bar_sink_01', 
